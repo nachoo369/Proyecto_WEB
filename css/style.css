@@ -8,14 +8,15 @@ body {
 .container {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    max-width: 1200px;
+    justify-content: space-around;
+    max-width: 1300px;
     margin: 0 auto;
-    padding: 6%;
+    padding: 1%;
+    background-color: #f0f8e8;
 }
 
 .carousel {
-    width: 50%;
+    width: 100%;
     position: fixed;
     padding: auto;
 }
@@ -23,6 +24,7 @@ body {
 .slide {
     width: 100%;
     display: none;
+    background-size: 1025px 350px;
 }
 
 .content {
@@ -48,15 +50,13 @@ h1 {
 }
 
 .button a:hover {
-    background-color: #26a63e;
+    background-color: #53c468;
 }
 
-.professionals-box {
-    background-color: #F4F4F4; /* Color de fondo sutil */
-    padding: 80px 20px;
+.professionals-box { /* Color de fondo sutil */
+    padding: 80px 20px; /* Borde sutil */
+    border-radius: 5px;
     text-align: center;
-    border: 1px solid #ddd; /* Borde sutil */
-    border-radius: 5px; /* Esquinas redondeadas */
 }
 
 h2 {
@@ -65,7 +65,7 @@ h2 {
 
 
 .navbar {
-    background-color: #4cae4f; /* Fondo verde del menú */
+    background-color: #000000; /* Fondo verde del menú */
     position: sticky;
     top: 0;
     z-index: 100;
@@ -93,7 +93,7 @@ h2 {
 
 .nav-links a {
     text-decoration: none;
-    color: #fff; /* Color del texto de los enlaces */
+    color: #000000; /* Color del texto de los enlaces */
     font-weight: bold;
 }
 
@@ -110,7 +110,7 @@ h2 {
     align-items: center;
     justify-content: space-between;
     padding: 10px 20px;
-    background: linear-gradient(#5cd860, rgb(255, 255, 108));
+    background: linear-gradient(#ffffff, rgb(255, 255, 255));
 }
 
 .logo img {
@@ -130,7 +130,7 @@ h2 {
 
 .nav-links a {
     text-decoration: none;
-    color: #fff;
+    color: #000000;
     font-weight: bold;
 }
 
@@ -138,11 +138,7 @@ h2 {
     text-decoration: underline;
 }
 
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-}
+
 
 .carousel {
     width: 50%;
@@ -166,6 +162,12 @@ h1 {
 
 .about-us {
     text-align: center;
+    align-items: center;
+    justify-content: space-around;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 1%;
+    background-color: #ffffff;
 }
 
 h2 {

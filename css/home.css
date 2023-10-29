@@ -7,11 +7,14 @@ body {
 
 /* Estilo para la barra de navegación (navbar) */
 .navbar {
-    background-color: #333;
+    position: sticky;
+    top: 0;
+    z-index: 100;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding: 10px;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background: linear-gradient(#ffffff, rgb(255, 255, 255));
 }
 
 /* Estilo para el logo en la barra de navegación */
@@ -32,7 +35,7 @@ body {
 }
 
 .nav-links a {
-    color: #fff;
+    color: #000000;
     text-decoration: none;
     font-weight: bold;
 }
@@ -45,15 +48,18 @@ body {
 
 /* Estilo para la barra lateral (sidebar) */
 .sidebar {
-    background-color: #333;
-    color: #fff;
-    padding: 20px;
-    width: 200px;
+    width: 250px;
+    height: 81%;
+    background-color: #ffffff;
+    position: fixed;
+    overflow: hidden;
 }
 
 /* Estilo para las secciones en la barra lateral */
-.section h2 {
-    margin: 10px 0;
+.sidebar h2 {
+    color: #000000;
+    text-align: center;
+    padding: 15px 0;
 }
 
 .section ul {
@@ -61,15 +67,41 @@ body {
     padding: 0;
 }
 
-.section li {
-    margin: 5px 0;
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+.sidebar ul li:hover {
+    background-color: #39f9dc; /* Cambia el fondo a negro al pasar el cursor */
+    color: #ffffff; /* Cambia el color del texto a blanco al pasar el cursor */
 }
 
-/* Estilo para el contenido principal */
+.sidebar ul li a {
+    color: #000000;
+    text-decoration: none;
+    display: block;
+    padding: 10px;
+}
+
 .content {
-    margin: 0 20px;
+    margin-left: 270px;
+    padding: 20px;
 }
-
+.bottom-bar {
+    background-color: #000000;
+    text-align: center;
+    padding: 10px 0;
+}
+.btn {
+    background-color: #4CAF50;
+    color: #ffffff;
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
 /* Estilo para el carrusel de imágenes (debes agregar la lógica para cambiar las imágenes) */
 /* Estilo para el carrusel de imágenes */
 .image-carousel {
@@ -86,7 +118,7 @@ body {
 
 .carousel-item {
     width: 33.33%; /* Ancho de cada imagen = 100% / número de imágenes */
-    height: 200px; /* Ajusta la altura según tus necesidades */
+    height: 380px; /* Ajusta la altura según tus necesidades */
     position: relative;
     text-align: center;
 }
@@ -119,7 +151,7 @@ body {
 }
 
 .carousel-item:hover .carousel-info {
-    opacity: 0.8; /* Mostrar información al pasar el cursor */
+    opacity: 1; /* Mostrar información al pasar el cursor */
 }
 
 .carousel-info h3, .carousel-info p {
@@ -128,17 +160,18 @@ body {
 }
 
 .carousel-info button {
-    background-color: #4CAF50;
+    background-color: #000000;
     color: #fff;
     padding: 5px 10px;
     border: none;
-    border-radius: 5px;
+    border-radius: 1px;
     cursor: pointer;
-    margin: 5px;
+    margin: 1px;
+    text-align: initial;
 }
 
 .carousel-controls {
-    text-align: center;
+    text-align: initial;
 }
 
 .prev, .next {
@@ -169,4 +202,9 @@ body {
 
 .reserve-button:hover {
     background-color: #45a049;
+}
+.slide {
+    width: 100%;
+    display: none;
+    background-size: 1025px 350px;
 }
