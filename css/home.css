@@ -1,0 +1,172 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+}
+
+/* Estilo para la barra de navegación (navbar) */
+.navbar {
+    background-color: #333;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+/* Estilo para el logo en la barra de navegación */
+.logo {
+    width: 100px;
+    height: auto;
+    margin-left: 20px;
+}
+
+/* Estilo para los enlaces en la barra de navegación */
+.nav-links {
+    list-style: none;
+    display: flex;
+}
+
+.nav-links li {
+    margin-right: 20px;
+}
+
+.nav-links a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Estilo para el contenedor principal */
+.container {
+    display: flex;
+    margin: 20px;
+}
+
+/* Estilo para la barra lateral (sidebar) */
+.sidebar {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    width: 200px;
+}
+
+/* Estilo para las secciones en la barra lateral */
+.section h2 {
+    margin: 10px 0;
+}
+
+.section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.section li {
+    margin: 5px 0;
+}
+
+/* Estilo para el contenido principal */
+.content {
+    margin: 0 20px;
+}
+
+/* Estilo para el carrusel de imágenes (debes agregar la lógica para cambiar las imágenes) */
+/* Estilo para el carrusel de imágenes */
+.image-carousel {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    background-color: #f5f5f5;
+}
+
+.carousel {
+    display: flex;
+    width: 300%; /* Ancho total = número de imágenes x 100% */
+}
+
+.carousel-item {
+    width: 33.33%; /* Ancho de cada imagen = 100% / número de imágenes */
+    height: 200px; /* Ajusta la altura según tus necesidades */
+    position: relative;
+    text-align: center;
+}
+
+.carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    cursor: pointer;
+    transition: transform 2s;
+}
+
+.carousel-item:hover img {
+    transform: scale(1.1); /* Escalar la imagen al pasar el cursor */
+}
+
+.carousel-info {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.carousel-item:hover .carousel-info {
+    opacity: 0.8; /* Mostrar información al pasar el cursor */
+}
+
+.carousel-info h3, .carousel-info p {
+    color: #fff;
+    margin: 5px;
+}
+
+.carousel-info button {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px;
+}
+
+.carousel-controls {
+    text-align: center;
+}
+
+.prev, .next {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px;
+}
+
+
+/* Estilo para los botones de reserva */
+.buttons {
+    margin-top: 20px;
+}
+
+.reserve-button {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.reserve-button:hover {
+    background-color: #45a049;
+}

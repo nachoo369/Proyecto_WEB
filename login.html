@@ -1,22 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/login.css">
     <title>Iniciar Sesión</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-    <div id="centered-content">
+    <div class="container">
+        <img src="images/main-logo.jpeg" alt="Logo Repetitivo" class="logo">
         <h1>Iniciar Sesión</h1>
-        <form id="loginForm">
-            <label for="usuario">Usuario (RUT):</label>
-            <input type="text" id="usuario" name="usuario" required><br><br>
-            <label for="contrasena">Contraseña:</label>
-            <input type="password" id="contrasena" name="contrasena" required><br><br>
+        <form action="procesar_login.php" method="post">
+            <label for="rut">RUT:</label>
+            <input type="text" id="rut" name="rut" pattern="[0-9]{7,8}-[0-9Kk]" title="El RUT debe tener el formato 12345678-9" required placeholder="EJEMPLO: 12345678-9">
+
+            <label for="clave">Contraseña:</label>
+            <input type="password" id="clave" name="clave" pattern="^(?=.*[A-Z])(?=.*[0-9]).{8,}$" title="Debe tener al menos una mayúscula y un número, y ser de al menos 8 caracteres" required>
+
             <button type="submit">Iniciar Sesión</button>
         </form>
-        <p>¿No tienes una cuenta? <a href="registro.html">Registrarse</a></p>
+        <div class="register-link">
+            ¿No tienes cuenta? <a href="registro.html">Regístrate</a>
+        </div>
     </div>
 </body>
 </html>
