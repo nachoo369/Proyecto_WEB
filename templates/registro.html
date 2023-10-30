@@ -2,14 +2,14 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="css/registro.css">
+    <link rel="stylesheet" type="text/css" href="../static/registro.css">
     <title>Registro de Personas</title>
 </head>
 <body>
     <div class="container">
-        <img src="images/main-logo.jpeg" alt="Logo Repetitivo" class="logo">
+        <img src="../static/images/main-logo.jpeg" alt="Logo Repetitivo" class="logo">
         <h1>Registro de Personas</h1>
-        <form action="procesar_registro.php" method="post">
+        <form action="/procesar_registro" method="POST">
             <label for="nombre">Nombre:</label>
             <input type="text" id="nombre" name="nombre" pattern="[A-Za-záéíóúÁÉÍÓÚñÑ\s]+" title="El nombre solo puede contener letras y espacios" required>
 
@@ -26,7 +26,10 @@
             <input type="password" id="confirmar-clave" name="confirmar-clave" pattern="^(?=.*[A-Z])(?=.*[0-9]).{8,}$" title="Debe tener al menos una mayúscula y un número, y ser de al menos 8 caracteres" required>
 
             <label for="fecha-nacimiento">Fecha de Nacimiento:</label>
-            <input type="date" id="fecha-nacimiento" name="fecha-nacimiento" required>
+            <input type="date" id="fecha_nacimiento" name="fecha-nacimiento" required>
+
+            <label for="telefono">Celular</label>
+            <input type="text" id="telefono" name="telefono" required>
 
             <label for="region">Región:</label>
             <select id="region" name="region" required>
@@ -52,7 +55,7 @@
             <button type="submit">Registrarse</button>
         </form>
         <div class="login-button">
-            <a href="login.html">¿Ya tienes una cuenta? Inicia sesión</a>
+            <a href="login">¿Ya tienes una cuenta? Inicia sesión</a>
         </div>
     </div>
 </body>

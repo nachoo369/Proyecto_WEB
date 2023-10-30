@@ -1,0 +1,108 @@
+/* Estilos generales para el cuerpo de la página */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #16873e; /* Fondo sutil */
+    color: #333;
+}
+
+/* Estilo para el encabezado */
+header {
+    background-color: #fff; /* Fondo blanco */
+    padding: 20px 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Estilo para el logo en el encabezado */
+header img {
+    max-width: 150px;
+    height: auto;
+}
+
+/* Estilo para la barra de navegación */
+nav ul {
+    list-style: none;
+    display: flex;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+/* Estilo para la sección hero */
+.hero {
+    background: url('hero-bg.jpg') center/cover;
+    color: #fff;
+    padding: 100px 0;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 3em;
+    margin: 20px 0;
+}
+
+.hero p {
+    font-size: 1.5em;
+    margin: 0;
+}
+
+/* Estilo para los botones */
+.btn {
+    display: inline-block;
+    padding: 15px 30px;
+    background-color: #000000; /* Verde de York */
+    color: #fff;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    margin: 20px 10px;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #000000; /* Cambio de color al pasar el cursor */
+}
+
+/* Estilo para la sección de características */
+.features {
+    background-color: #fff;
+    padding: 80px 0;
+}
+
+.feature {
+    text-align: center;
+    margin: 0 20px;
+}
+
+.feature h2 {
+    font-size: 2em;
+    margin: 20px 0;
+}
+
+.feature p {
+    font-size: 1.2em;
+}
+
+/* Estilo para el pie de página */
+footer {
+    background-color: #ffffff;
+    color: #11972c;
+    text-align: center;
+    padding: 20px 0;
+}
