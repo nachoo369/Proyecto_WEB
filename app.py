@@ -5,12 +5,15 @@ app = Flask(__name__)
 
 # Configuración de la base de datos
 db_config = {
-    'dbname': 'nombre_de_tu_base_de_datos',
-    'user': 'tu_usuario',
-    'password': 'tu_contraseña',
+    'dbname': 'clinica',
+    'user': 'postgres',
+    'password': 'asd369',
     'host': 'localhost'
 }
-
+#Ruta para index
+@app.route('/')
+def index():
+    return render_template('index.html')
 # Ruta para mostrar el formulario de registro
 @app.route('/registro')
 def registro():
@@ -50,6 +53,13 @@ def procesar_registro():
 @app.route('/login')
 def inicio_sesion():
     return render_template('login.html')
+
+@app.route('/procesar_login')
+def procesar_login():
+    RUT = request.form['rut']
+    clave = request.form['clave']
+    return
+
 
 if __name__ == '__main__':
     app.run(debug=True)
