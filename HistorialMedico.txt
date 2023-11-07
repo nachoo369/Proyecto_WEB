@@ -1,0 +1,25 @@
+CREATE TABLE Historial_Medico (
+    id SERIAL PRIMARY KEY,
+    paciente_id INT,
+    fecha DATE,
+    descripcion TEXT
+);
+
+CREATE OR REPLACE FUNCTION VerHistorialMedico(
+    paciente_id INT
+)
+RETURNS TABLE (
+    fecha DATE,
+    descripcion TEXT
+)
+AS $$
+BEGIN
+    RETURN QUERY (
+        SELECT fecha, descripcion
+        FROM Historial_Medico
+        WHERE paciente_id = paciente_id
+        ORDER BY fecha DESC -- Opcional: Ordena los registros por fecha descendente
+    );
+END;
+$$ LANGUAGE plpgsql;
+
