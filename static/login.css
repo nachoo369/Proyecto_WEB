@@ -75,3 +75,10 @@ button:hover {
 .register-link a:hover {
     text-decoration: underline;
 }
+#loading {
+    display: none;
+    position: absolute;
+    top: 75%; /* Coloca el gif debajo del contenido anterior */
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

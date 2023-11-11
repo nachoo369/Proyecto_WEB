@@ -1,7 +1,9 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, session, jsonify
 import psycopg2
+import time
 
 app = Flask(__name__)
+app.secret_key = 'asd369'
 
 # Configuración de la base de datos
 db_config = {
@@ -37,9 +39,10 @@ def procesar_registro():
     conn = psycopg2.connect(database="clinica", user="postgres", password="asd369", host="localhost", port="5432", options="-c client_encoding=UTF8")
     cursor = conn.cursor()
 
+
     # Insertar datos en la base de datos
     cursor.execute(
-        "INSERT INTO cliente (rutPac, nombre, apellido, fechanac, region, ciudad, sexo, telefono, clave) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)",
+        "INSERT INTO cliente (rutPac, nombre, apellido, fechanac, region, ciudad, sexo, telefono, contraseña) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)",
         (rut, nombre, apellidos, fecha_nacimiento, region, ciudad, sexo, telefono, clave)
     )
 
@@ -54,12 +57,36 @@ def procesar_registro():
 def inicio_sesion():
     return render_template('login.html')
 
-@app.route('/procesar_login')
+@app.route('/procesar_login', methods=['POST'])
 def procesar_login():
-    RUT = request.form['rut']
-    clave = request.form['clave']
-    return
+    try:
+        rut = request.form['rut']
+        contraseña = request.form['clave']
+
+        # Conectarse a la base de datos
+        conn = psycopg2.connect(**db_config)
+        cursor = conn.cursor()
+
+        # Verificar las credenciales en la base de datos
+        cursor.execute("SELECT * FROM cliente WHERE rutPac = %s AND contraseña = %s", (rut, contraseña))
+        usuario = cursor.fetchone()
+
+        conn.close()
+
+        time.sleep(2)
+
+        if usuario:
+            # Usuario autenticado con éxito, puedes almacenar información en la sesión
+            session['rut'] = usuario[0]  # Almacena el RUT en la sesión, o cualquier otro dato que desees
+            return jsonify({'valid': True})
+        else:
+            return jsonify({'valid': False, 'error': 'Credenciales inválidas'})
+    except Exception as e:
+        return jsonify({'valid': False, 'error': str(e)}), 500  # Devuelve un código de estado 500 para indicar un error interno del servidor
 
 
+@app.route("/home")
+def home():
+    return render_template("home.html")
 if __name__ == '__main__':
     app.run(debug=True)

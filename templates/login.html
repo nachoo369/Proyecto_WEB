@@ -4,20 +4,24 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="../static/login.css">
     <title>Iniciar Sesión</title>
+    <script defer src="../static/js/gif.js"></script>
 </head>
 <body>
     <div class="container">
         <img src="../static/images/main-logo.jpeg" alt="Logo Repetitivo" class="logo">
         <h1>Iniciar Sesión</h1>
-        <form action="procesar_login.php" method="post">
+        <form action="/procesar_login" method="post" id="login-form">
             <label for="rut">RUT:</label>
             <input type="text" id="rut" name="rut" pattern="[0-9]{7,8}-[0-9Kk]" title="El RUT debe tener el formato 12345678-9" required placeholder="EJEMPLO: 12345678-9">
-
+        
             <label for="clave">Contraseña:</label>
             <input type="password" id="clave" name="clave" pattern="^(?=.*[A-Z])(?=.*[0-9]).{8,}$" title="Debe tener al menos una mayúscula y un número, y ser de al menos 8 caracteres" required>
-
-            <button type="submit">Iniciar Sesión</button>
+        
+            <button id="login-button" type="button">Iniciar Sesión</button>
         </form>
+        <div id="loading" style="display:none;">
+            <img src="../static/images/loading.gif" alt="Cargando...">
+        </div>
         <div class="register-link">
             ¿No tienes cuenta? <a href="registro">Regístrate</a>
         </div>
