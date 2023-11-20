@@ -1,0 +1,91 @@
+-- Crear la tabla 'clientes'
+CREATE TABLE clientes (
+    NumTelefono varchar(11) primary key,
+	correo text
+    );
+
+-- Insertar datos de ejemplo en la tabla 'clientes'
+INSERT INTO Contacto (NumTelefono, correo)
+VALUES
+    ('987650021', 'closorno@miclinica.cl'),
+    ('987650322', 'clinicaosorno@miclinica.cl'),
+	('6432556', 'clinicaosorno@outlook.cl'),
+	;
+
+-- Crear la tabla 'informacion'
+CREATE TABLE CentroDeAyuda(
+    tipo VARCHAR(50) PRIMARY KEY,
+    titulo VARCHAR(100),
+    descripcion TEXT
+);
+
+-- Insertar datos de ejemplo en la tabla 'informacion'
+INSERT INTO CentroDeAyuda(tipo, titulo, descripcion)
+VALUES
+    ('Centro de Ayuda', '¿Cómo podemos ayudarte?', 'Nuestro centro de ayuda está disponible para responder a todas tus preguntas.'),
+    ('Contacto', 'Información de Contacto', 'Ponte en contacto con nosotros a través de nuestro correo electrónico o número telefónico.'),
+    ('Reclamos', 'Proceso de Reclamos', 'Si tienes algún reclamo, por favor sigue nuestro proceso de reclamos para una rápida solución.'),
+    ('MiClínica', 'Accede a tu Cuenta', 'Ingresa a MiClínica para gestionar tus citas, ver tu historial médico y más.');
+
+
+CREATE TABLE MiClinica (
+	descripcion text primary key
+	);
+	
+INSERT INTO MiClinica (descripcion)
+VALUES 
+	( ' "Clínica Osorno"
+
+La Clínica Osorno, es una institución líder en el cuidado de la salud que ha estado sirviendo a la comunidad desde su fundación en 2010. Con una dedicación inquebrantable a la excelencia médica y un compromiso constante con el bienestar de nuestros pacientes, nos hemos ganado la reputación de ser una de las mejores opciones para el cuidado de la salud en la región.
+
+Ubicación Estratégica:
+Nuestra clínica está convenientemente ubicada en Francisco Bilbao #435 de Osorno, brindando fácil acceso a pacientes de toda la ciudad y áreas circundantes. Nos enorgullece proporcionar un entorno acogedor y accesible que prioriza la comodidad de nuestros pacientes.
+
+Compromiso con la Calidad:
+Desde el momento de nuestra fundación, hemos mantenido un compromiso inquebrantable con la calidad en todos los aspectos de nuestros servicios médicos. Contamos con un equipo de profesionales altamente capacitados y experimentados que trabajan incansablemente para garantizar la atención médica más avanzada y compasiva.
+
+Especialidades Destacadas:
+Nos distinguimos por ofrecer una amplia gama de especialidades médicas. Nuestro equipo de especialistas abarca áreas como cardiología, pediatría, ginecología, ortopedia, y más.
+Nos esforzamos por proporcionar atención integral que aborde las necesidades médicas específicas de cada paciente.
+
+Enfoque Preventivo:
+Además de la atención curativa, nos centramos en la promoción de la salud y la prevención de enfermedades.
+Ofrecemos programas de salud preventiva, chequeos regulares y educación para empoderar a nuestros pacientes a tomar decisiones informadas sobre su bienestar.
+
+Tecnología de Vanguardia:
+La Clínica Osorno invierte constantemente en tecnología médica de última generación para garantizar diagnósticos precisos y tratamientos efectivos. Nuestro compromiso con la innovación nos permite ofrecer a nuestros pacientes acceso a las últimas herramientas y técnicas médicas disponibles.
+
+Atención Personalizada:
+En nuestra clínica, creemos en la atención médica personalizada.
+Cada paciente es único, y nos esforzamos por adaptar nuestros servicios para satisfacer las necesidades individuales de cada persona que confía en nosotros para su cuidado.
+
+Compromiso con la Comunidad:
+No solo somos proveedores de atención médica, sino que también somos parte integral de la comunidad a la que servimos. Participamos activamente en iniciativas comunitarias, programas de bienestar y actividades educativas para contribuir al bienestar general de nuestra comunidad.
+
+En Clinica Osorno, nos enorgullece ser un faro de salud y esperanza. Estamos dedicados a mejorar la calidad de vida de nuestros pacientes y construir un futuro más saludable para todos.'
+);
+
+CREATE TABLE CentroDeAyuda(
+Informacion text primary key
+);
+
+insert into CentroDeAyuda(Informacion)
+VALUES
+	('Preguntas Frecuentes (FAQ): 
+Explora nuestra sección de Preguntas Frecuentes para obtener respuestas claras y concisas sobre una variedad de temas, desde cómo reservar citas hasta detalles sobre nuestras especialidades médicas.
+
+Cómo Reservar Citas: 
+Descubre los diferentes métodos para reservar tu cita médica. Ya sea en línea, por teléfono o en persona, te proporcionamos las opciones para adaptarse a tu conveniencia.
+
+Información sobre Especialidades Médicas: 
+Conoce más sobre nuestros destacados profesionales de la salud y las diversas especialidades médicas que ofrecemos. Encuentra el especialista adecuado para tus necesidades.
+
+Guías de Preparación para Consultas y Procedimientos: 
+Antes de su próxima consulta o procedimiento, asegúrese de estar preparado. Consulta nuestras guías detalladas para obtener información sobre los pasos previos necesarios.
+
+Política de Pagos y Seguros: 
+Entiende nuestras políticas de facturación y pagos, así como la información sobre los seguros que aceptamos. Estamos aquí para ayudarle a navegar por el proceso de autorización y pago.
+	 
+Comentarios y Sugerencias: 
+Valoramos tu opinión. Usa nuestro formulario para compartir tus experiencias, comentarios y sugerencias. Estamos aquí para escucharte y mejorar constantemente nuestros servicios.'
+);
