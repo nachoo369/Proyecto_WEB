@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../static/style.css"> <!-- Asegúrate de ajustar la ruta de tu archivo de estilo -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-........" crossorigin="anonymous" />
+    <title>Contacto</title>
+</head>
+<body>
+    <div class="navbar" id="navbar">
+        <div class="logo">
+            <a href="/home">
+                <img src="../static/images/logo.png" alt="Logo Clinica Osorno">
+            </a>
+        </div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="/ayuda"><i class="fas fa-question-circle"></i> Ayuda</a></li>
+            <li><a href="/contacto"><i class="fas fa-envelope"></i> Contacto</a></li>
+            {% if 'rut' in session %}
+                <li><a href="/mi_clinica"><i class="fas fa-user"></i> {{ session['rut'] }}</a></li>
+                <li><a href="/cerrar_sesion"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a></li>
+            {% else %}
+                <li><a href="/login"><i class="fas fa-hospital"></i> MiClínica</a></li>
+            {% endif %}
+        </ul>
+        <div class="menu-icon" id="menuIcon">&#9776;</div>
+    </div>
+
+    <div class="container">
+        <h2>Contacto</h2>
+
+        <div class="contact-centers">
+            <div class="contact-center">
+                <h3>Clinica Centro Rahue</h3>
+                <img src="../static/images/apoquindo.jpg" alt="Centro Rahue">
+                <div class="contact-box">
+                    <p>Teléfono: +56 9 XXXX XXXX</p>
+                    <p>Correo: rahue@example.com</p>
+                    <!-- Puedes agregar más información si es necesario -->
+                </div>
+            </div>
+
+            <div class="contact-center">
+                <h3>Clinica Centro Zenteno</h3>
+                <img src="../static/images/vinadelmar.png" alt="Centro Zenteno">
+                <div class="contact-box">
+                    <p>Teléfono: +56 9 YYYY YYYY</p>
+                    <p>Correo: zenteno@example.com</p>
+                    <!-- Puedes agregar más información si es necesario -->
+                </div>
+            </div>
+        </div>
+
+        <div class="social-media">
+            <a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.facebook.com/"><i class="fab fa-facebook"></i></a>
+            <a href="https://mail.google.com/"><i class="fas fa-envelope"></i></a>
+            <!-- Agrega más iconos de redes sociales según sea necesario -->
+        </div>
+    </div>
+
+    <script src="../static/js/images.js"></script>
+</body>
+</html>

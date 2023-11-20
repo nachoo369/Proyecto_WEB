@@ -3,19 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="../static/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-........" crossorigin="anonymous" />
     <title>Reserva tu cita</title>
 </head>
 <body>
-    <div class="navbar">
+    <div class="navbar" id="navbar">
         <div class="logo">
-            <img src="../static/images/logo.png" alt="Logo Clinica Osorno">
+            <a href="/home">
+                <img src="../static/images/logo.png" alt="Logo Clinica Osorno">
+            </a>
         </div>
-        <ul class="nav-links">
-            <li><a href="#about">¿Quienes Somos?</a></li>
-            <li><a href="#contacto">Contacto</a></li>
-            <li><a href="#pg">Preguntas Frecuentes</a></li>
-            <li><a href="/login">MiClínica</a></li>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#about"><i class="fas fa-question-circle"></i> Ayuda</a></li>
+            <li><a href="#contacto"><i class="fas fa-envelope"></i> Contacto</a></li>
+            {% if 'rut' in session %}
+                <li><a href="/mi_clinica"><i class="fas fa-user"></i> {{ session['rut'] }}</a></li>
+                <li><a href="/cerrar_sesion"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a></li>
+            {% else %}
+                <li><a href="/login"><i class="fas fa-hospital"></i> MiClínica</a></li>
+            {% endif %}
         </ul>
+        <div class="menu-icon" id="menuIcon">&#9776;</div>
     </div>
     <div class="container">
         <div class="carousel">
@@ -48,7 +56,8 @@
     </section>
     <div class="about" id="about">
         <h2>¿Quiénes Somos?</h2>
-        <p class="text1">Somos una clínica especializada en brindar servicios de salud de la más alta calidad. Nuestra misión fundamental es cuidar y preservar tu bienestar en cada paso de tu viaje hacia una vida saludable y plena. Estamos comprometidos en proporcionarte una atención excepcional que va más allá de lo convencional, poniendo en primer lugar tu salud y comodidad.
+        <button class="toggle-btn" onclick="toggleContent('about-content')">Mostrar Más</button>
+        <p class="text1" id="about-content">Somos una clínica especializada en brindar servicios de salud de la más alta calidad. Nuestra misión fundamental es cuidar y preservar tu bienestar en cada paso de tu viaje hacia una vida saludable y plena. Estamos comprometidos en proporcionarte una atención excepcional que va más allá de lo convencional, poniendo en primer lugar tu salud y comodidad.
 
             En nuestra clínica, valoramos cada aspecto de tu salud y bienestar. Contamos con un equipo de profesionales altamente capacitados y apasionados que se dedican a proporcionar un cuidado personalizado y orientado a tus necesidades específicas. Están comprometidos a brindarte la atención que mereces, asegurando que te sientas apoyado y escuchado en todo momento.
             
@@ -59,24 +68,37 @@
             En resumen, nuestra clínica está dedicada a proporcionar una atención médica excepcional, apoyada por profesionales altamente cualificados, tecnología de punta y un compromiso inquebrantable con tu salud y bienestar. Estamos aquí para cuidarte, guiarte y ser tu socio de confianza en el camino hacia una vida más saludable. Tu salud es nuestra pasión, y estamos emocionados de servirte en cada paso de tu viaje hacia una vida más saludable y feliz.</p>
     </div>
     <section class="contact-box">
-    <div id="contacto">
-        <h2>Contacto</h2>
-        <p>Número de Teléfono: +56 9 XXXX XXXX</p>
-        <p>Dirección: Calle Principal 123, Santiago, Chile</p>
+        <div id="contacto">
+            <h2>Contacto</h2>
+            <button class="toggle-btn" onclick="toggleContent('contacto-content')">Mostrar Más</button>
+            <div id="contacto-content"> 
+                <p>Número de Teléfono: +56 9 XXXX XXXX</p>
+                <p>Dirección: Calle Principal 123, Santiago, Chile</p>
 
-        <div class="secretaries">
-            <p>Secretaria 1: Juanita - +56 9 1111 1111 - juanita@example.com</p>
-            <p>Secretaria 2: Pedro - +56 9 2222 2222 - pedro@example.com</p>
-            <p>Encargado: María - +56 9 3333 3333 - maria@example.com</p>
-        </div>
+                <div class="secretaries">
+                    <p>Secretaria 1: Juanita - +56 9 1111 1111 - juanita@example.com</p>
+                    <p>Secretaria 2: Pedro - +56 9 2222 2222 - pedro@example.com</p>
+                    <p>Encargado: María - +56 9 3333 3333 - maria@example.com</p>
+                </div>
+            </div>
 
-        <div class="social-media">
-            <a href="https://www.instagram.com/"><img src="instagram.png" alt="Instagram"></a>
-            <a href="https://www.facebook.com/"><img src="facebook.png" alt="Facebook"></a>
-            <a href="https://mail.google.com/"><img src="gmail.png" alt="Gmail"></a>
-        </div>
+            <div class="social-media">
+                <a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.facebook.com/"><i class="fab fa-facebook"></i></a>
+                <a href="https://mail.google.com/"><img src="gmail.png" alt="Gmail"></a>
+            </div>
     </div>
     </section>
     <script src="../static/js/images.js"></script>
+    <script>
+        function toggleContent(elementId) {
+            var content = document.getElementById(elementId);
+            if (content.style.display === "block" || content.style.display === "") {
+                content.style.display = "none";
+            } else {
+                content.style.display = "block";
+            }
+        }
+    </script>
 </body>
 </html>

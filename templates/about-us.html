@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-........" crossorigin="anonymous" />
+    <title>About Us - Clínica Osorno</title>
+    <link rel="stylesheet" type="text/css" href="../static/home.css">
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo">
+            <a href="/home">
+                <img src="../static/images/logo.png" alt="Logo Clinica Osorno">
+            </a>
+        </div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="/ayuda"><i class="fas fa-question-circle"></i> Ayuda</a></li>
+            <li><a href="/contacto"><i class="fas fa-envelope"></i> Contacto</a></li>
+            {% if 'rut' in session %}
+                <li><a href="/mi_clinica"><i class="fas fa-user"></i> {{ session['rut'] }}</a></li>
+                <li><a href="/cerrar_sesion"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a></li>
+            {% else %}
+                <li><a href="/login"><i class="fas fa-hospital"></i> MiClínica</a></li>
+            {% endif %}
+        </ul>
+        <div class="menu-icon" id="menuIcon">&#9776;</div>
+    </div>
+
+    <div class="container">
+        <div class="about-section">
+            <img class="about-image" src="../static/images/clinica_vieja.jpg" alt="Imagen de About Us">
+            <p class="small-text">Primer Centro de Salud Clínica Osorno</p>
+            <div class="about-description">
+                <p>En el apogeo de los años 50, un pequeño pueblo llamado Elmwood se encontraba inmerso en la tranquilidad de la posguerra. Con la esperanza y la prosperidad en el aire, un grupo de apasionados profesionales de la salud decidió unir fuerzas para establecer la "Clínica Elmwood", un bastión de cuidado médico en medio de la comunidad</p>
+                <p>Fundada en 1952 por el Dr. William Anderson, un respetado médico local, la clínica comenzó como un modesto edificio de dos pisos con techos altos y ventanas de madera. El personal inicial incluía enfermeras comprometidas, una recepcionista amable y un conserje que se preocupaba por mantener todo impecable.</p>
+                <p>La clínica ofrecía una variedad de servicios médicos que abarcaban desde consultas generales hasta tratamientos especializados. La sala de espera, decorada con sillas de vinilo y revistas de la época, se llenaba de pacientes que venían en busca de atención médica confiable y personalizada.</p>
+                <p>En aquella época, la medicina estaba dando grandes pasos, y la Clínica Elmwood estaba a la vanguardia de las innovaciones médicas. Aunque los avances tecnológicos eran limitados en comparación con la actualidad, la dedicación del personal y su enfoque centrado en el paciente hicieron que la clínica destacara.</p>
+                <p>A lo largo de los años, la Clínica Elmwood se convirtió en el corazón de la comunidad, brindando cuidado a generaciones de familias locales. Las relaciones personales entre médicos y pacientes eran la norma, y la confianza mutua se cultivaba en cada consulta.</p>
+                <p>Con el tiempo, la clínica creció y se modernizó, adaptándose a los cambios en la atención médica. Sin embargo, siempre mantuvo el espíritu cálido y acogedor de sus primeros días. La Clínica Elmwood se convirtió en un símbolo de atención médica de calidad, arraigada en la historia del pueblo y apreciada por todos aquellos que buscaban cuidado compasivo y experto.</p>
+                <!-- Agrega más párrafos según sea necesario -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Puedes incluir el script para el menú desplegable aquí -->
+
+</body>
+</html>

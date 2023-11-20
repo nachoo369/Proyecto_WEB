@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendario de Citas</title>
+    <link rel="stylesheet" href="../static/normalize.css">
+    <link rel="stylesheet" href="../static/consulta.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-........" crossorigin="anonymous" />
+
+</head>
+<body>
+    <div class="navbar" id="navbar">
+        <div class="logo">
+            <a href="/home">
+                <img src="../static/images/logo.png" alt="Logo Clinica Osorno">
+            </a>
+        </div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#about"><i class="fas fa-question-circle"></i> Ayuda</a></li>
+            <li><a href="#contacto"><i class="fas fa-envelope"></i> Contacto</a></li>
+            {% if 'rut' in session %}
+                <li><a href="/mi_clinica"><i class="fas fa-user"></i> {{ session['rut'] }}</a></li>
+                <li><a href="/cerrar_sesion"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a></li>
+            {% else %}
+                <li><a href="/login"><i class="fas fa-hospital"></i> MiClínica</a></li>
+            {% endif %}
+        </ul>
+        <div class="menu-icon" id="menuIcon">&#9776;</div>
+    </div>
+    <header>
+        <h1>Selecciona el día y horario de tu reserva</h1>
+    </header>
+    <main class="contenedor">
+        <section class="filtros">
+            <!-- Menú desplegable para tipo de consulta -->
+            <label for="tipo-consulta">Tipo de Consulta:</label>
+            <select id="tipo-consulta" class="menu-desplegable">
+                <option value="consulta1">Consultas pediátricas</option>
+                <option value="consulta2">Consultas ginecológicas</option>
+                <!-- Agrega más opciones según sea necesario -->
+            </select>
+
+            <!-- Menú desplegable para seleccionar doctor -->
+            <label for="doctor">Doctor:</label>
+            <select id="doctor" class="menu-desplegable">
+                <!-- Las opciones se cargarán dinámicamente con JavaScript -->
+            </select>
+            <label for="mes">Mes:</label>
+            <select id="mes" class="menu-desplegable">
+                <option value="0">Enero</option>
+                <option value="1">Febrero</option>
+                <option value="2">Marzo</option>
+                <option value="3">Abril</option>
+                <option value="4">Mayo</option>
+                <option value="5">Junio</option>
+                <option value="6">Julio</option>
+                <option value="7">Agosto</option>
+                <option value="8">Septiembre</option>
+                <option value="9">Octubre</option>
+                <option value="10">Noviembre</option>
+                <option value="11">Diciembre</option>
+            </select>
+        </section>
+
+        <section class="contenido">
+            <section class="calendario" id="calendario">
+                <!-- Utiliza JavaScript para agregar dinámicamente los días -->
+            </section>
+
+            <section class="horarios">
+                <label for="horario">Horarios Disponibles:</label>
+                <select id="horario" class="menu-desplegable" disabled>
+                    <!-- Las opciones se cargarán dinámicamente con JavaScript -->
+                </select>
+
+                <a href="/historial_consulta" class="boton-verde" id="reservar" disabled>Reservar Cita</a>
+            </section>
+        </section>
+
+        <script src="../static/js/calendario.js"></script>
+    </main>
+    <script src="../static/js/navbar.js"></script>
+</body>
+
+</html>

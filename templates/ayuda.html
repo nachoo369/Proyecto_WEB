@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../static/style.css"> <!-- Asegúrate de ajustar la ruta de tu archivo de estilo -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-........" crossorigin="anonymous" />
+    <title>Centro de Ayuda</title>
+    <style>
+        .title {
+            cursor: pointer;
+            padding: 10px;
+            margin: 5px 0;
+            background-color: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .question-container {
+            margin-top: 20px;
+        }
+
+        .question {
+            cursor: pointer;
+            padding: 10px;
+            margin: 5px 0;
+            background-color: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            transition: all 0.5s; /* Agrega una transición suave */
+            overflow: hidden; /* Evita que el contenido sobresalga */
+        }
+
+        .answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out; /* Agrega una transición suave */
+            padding: 10px;
+            margin-top: 5px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .question.opened {
+            height: auto; /* Ajusta la altura al contenido */
+            padding: 10px;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar" id="navbar">
+        <div class="logo">
+            <a href="/home">
+                <img src="../static/images/logo.png" alt="Logo Clinica Osorno">
+            </a>
+        </div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="/ayuda"><i class="fas fa-question-circle"></i> Ayuda</a></li>
+            <li><a href="/contacto"><i class="fas fa-envelope"></i> Contacto</a></li>
+            {% if 'rut' in session %}
+                <li><a href="/mi_clinica"><i class="fas fa-user"></i> {{ session['rut'] }}</a></li>
+                <li><a href="/cerrar_sesion"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a></li>
+            {% else %}
+                <li><a href="/login"><i class="fas fa-hospital"></i> MiClínica</a></li>
+            {% endif %}
+        </ul>
+        <div class="menu-icon" id="menuIcon">&#9776;</div>
+    </div>
+    <h2 class="title">Centro de Ayuda</h2>
+
+    <div class="container">
+
+        <div class="question-container">
+            <div class="question" onclick="toggleAnswer('answer1')">
+                <strong>Pregunta 1:</strong> ¿Cómo reservo una cita médica?
+            </div>
+            <div class="answer" id="answer1">
+                <p>Para reservar una cita médica, sigue estos pasos...</p>
+            </div>
+        </div>
+
+        <div class="question-container">
+            <div class="question" onclick="toggleAnswer('answer2')">
+                <strong>Pregunta 2:</strong> ¿Cómo accedo a mi historial médico en línea?
+            </div>
+            <div class="answer" id="answer2">
+                <p>Para acceder a tu historial médico en línea, sigue estos pasos...</p>
+            </div>
+        </div>
+
+        <div class="question-container">
+            <div class="question" onclick="toggleAnswer('answer3')">
+                <strong>Pregunta 3:</strong> ¿Cómo cambio mi información personal?
+            </div>
+            <div class="answer" id="answer3">
+                <p>Para cambiar tu información personal, sigue estos pasos...</p>
+            </div>
+        </div>
+
+        <div class="question-container">
+            <div class="question" onclick="toggleAnswer('answer4')">
+                <strong>Pregunta 4:</strong> ¿Cómo contacto al soporte técnico?
+            </div>
+            <div class="answer" id="answer4">
+                <p>Para contactar al soporte técnico, sigue estos pasos...</p>
+            </div>
+        </div>
+
+        <!-- Agrega más preguntas y respuestas según sea necesario -->
+
+    </div>
+
+    <script src="../static/js/images.js"></script>
+    <script>
+        function toggleAnswer(answerId) {
+            var answer = document.getElementById(answerId);
+            var question = answer.previousElementSibling;
+
+            question.classList.toggle("opened");
+            
+            if (answer.style.maxHeight) {
+                answer.style.maxHeight = null;
+            } else {
+                answer.style.maxHeight = answer.scrollHeight + "px";
+            }
+        }
+    </script>
+</body>
+</html>

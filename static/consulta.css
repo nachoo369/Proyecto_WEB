@@ -1,0 +1,241 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+body {
+    font-family: 'Montserrat', sans-serif;
+    background: #f5f7fa;
+    padding: 0;
+    margin: 0;
+}
+header {
+    background: #80c684;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+}
+.contenedor{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.seccion-menu, .seccion-horarios {
+    flex: 1;
+    padding: 20px;
+}
+.seccion-calendario {
+    flex: 2;
+    padding: 20px;
+}
+.nombre_mes{
+    text-align: center;
+    color: #51565d;
+    font-weight: 400;
+    padding: 30px 0;
+
+}
+
+.dias{
+    display: grid;
+    grid-template-columns: repeat(7,1fr);
+    place-items: center;
+    height: 45px;
+    border-bottom: 1px solid #a6a8b31f;
+    border-top: 1px solid #a6a8b31f;
+    color: #51565d;
+}
+
+.calendario{
+    display: grid;
+    grid-template-columns: repeat(7,1fr);
+    grid-auto-rows: 120px;
+}
+
+.calendario_dias {
+    background-color: rgb(149, 250, 149);
+    color: white;
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ccc;
+    transition: background-color 0.3s; /* Agregamos transición para un cambio suave de color */
+    cursor: pointer; /* Cursor apuntando para indicar que es interactivo */
+}
+
+/* Estilos cuando el cursor pasa sobre el día */
+.calendario_dias:hover {
+    background-color: rgb(124, 221, 124);
+}
+
+/* Estilos cuando se hace clic en el día */
+.calendario_dias:active {
+    background-color: rgb(84, 191, 84);
+}
+.ocupado {
+    /* Estilos para días ocupados */
+    background-color: rgb(250, 79, 79);
+}
+.navbar {
+    background-color: #000000; /* Fondo verde del menú */
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+}
+
+.logo img {
+    max-height: 9px; /* Ajusta el tamaño del logotipo */
+
+}
+
+.nav-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: flex-end; /* Alinea los enlaces al otro lado del logo */
+    align-items: center; /* Centra verticalmente los enlaces */
+}
+
+.nav-links li {
+    margin-left: 20px; /* Agrega un margen izquierdo entre los enlaces */
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #000000; /* Color del texto de los enlaces */
+    font-weight: bold;
+}
+
+.nav-links a:hover {
+    text-decoration: underline;
+}
+
+
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background: linear-gradient(#ffffff, rgb(255, 255, 255));
+}
+
+.logo img {
+    max-height: 50px;
+}
+
+.nav-links {
+    list-style: none;
+    margin: 10px;
+    padding: 0;
+    display: flex;
+}
+
+.nav-links li {
+    margin-right: 20px;
+}
+
+.nav-links a {
+    position: relative;
+    display: inline-block; /* Añadido para que el fondo se ajuste al contenido */
+    padding: 10px 15px; /* Ajusta el relleno según sea necesario */
+    text-decoration: none; /* Añadido para eliminar la subrayado predeterminado en los enlaces */
+    color: #000000; /* Añadido para establecer el color del texto */
+}
+
+.nav-links a::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: transparent; /* Fondo transparente por defecto */
+    z-index: -1;
+    border-radius: 10px;
+    transition: background-color 0.5s ease; /* Transición suave para el cambio de color */
+}
+
+.nav-links a:hover::before {
+    background-color: #c7e5c8; /* Cambia el fondo al color deseado al pasar el cursor */
+}
+
+/* Estilos para ajustar el tamaño y posición de los elementos */
+.contenido {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 20px; /* Agregado para separar del borde del contenedor principal */
+}
+
+.seccion-menu,
+.seccion-horarios,
+.seccion-calendario {
+    width: calc(33% - 20px); /* Ajustado para ocupar un tercio del ancho y considerar el espacio entre elementos */
+    box-sizing: border-box; /* Para incluir el padding y el borde en el ancho total */
+}
+
+.calendario {
+    width: 100%; /* El calendario ahora ocupa el 100% del ancho de su contenedor */
+    margin-bottom: 10px;
+}
+
+.menu-desplegable {
+    width: 100%; /* El menú desplegable ahora ocupa el 100% del ancho de su contenedor */
+    margin-bottom: 10px;
+}
+
+.boton-verde {
+    width: 100%;
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #4CAF50;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    box-sizing: border-box; /* Incluye el padding y el borde en el tamaño total */
+}
+
+.horarios {
+    width: 100%; /* Los horarios ahora ocupan el 100% del ancho de su contenedor */
+    margin-top: 10px;
+}
+.menu-icon {
+    display: none; /* Inicialmente oculto en pantallas grandes */
+    cursor: pointer;
+    font-size: 24px;
+}
+@media only screen and (max-width: 600px) {
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 70px;
+        right: 0; /* Alinea los enlaces a la derecha en pantallas pequeñas */
+        width: 100%;
+        background-color: #ffffff;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.1);
+        z-index: 1;
+    }
+
+    .nav-links.show {
+        display: flex;
+    }
+
+    .nav-links li {
+        text-align: right; /* Alinea los enlaces a la derecha */
+        margin-right: 0;
+        margin-bottom: 10px;
+        margin-left: 0; /* Elimina el margen izquierdo */
+    }
+
+    .menu-icon {
+        display: block;
+    }
+}

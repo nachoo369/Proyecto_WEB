@@ -9,6 +9,7 @@ body {
 
 .container {
     display: flex;
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan a la siguiente línea */
     align-items: center;
     justify-content: space-around;
     max-width: 1300px;
@@ -17,10 +18,11 @@ body {
     background-color: #f0f8e8;
 }
 
+/* Estilos del carrusel */
 .carousel {
     width: 100%;
-    position: fixed;
-    padding: auto;
+    max-width: 100%; /* Asegura que el carrusel sea responsivo */
+    position: relative;
 }
 
 .slide {
@@ -105,6 +107,46 @@ h2 {
 
 
 .navbar {
+    background-color: #000000; /* Fondo verde del menú */
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+}
+
+.logo img {
+    max-height: 9px; /* Ajusta el tamaño del logotipo */
+
+}
+
+.nav-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: flex-end; /* Alinea los enlaces al otro lado del logo */
+    align-items: center; /* Centra verticalmente los enlaces */
+}
+
+.nav-links li {
+    margin-left: 20px; /* Agrega un margen izquierdo entre los enlaces */
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #000000; /* Color del texto de los enlaces */
+    font-weight: bold;
+}
+
+.nav-links a:hover {
+    text-decoration: underline;
+}
+
+
+.navbar {
     position: sticky;
     top: 0;
     z-index: 100;
@@ -121,7 +163,7 @@ h2 {
 
 .nav-links {
     list-style: none;
-    margin: 0;
+    margin: 10px;
     padding: 0;
     display: flex;
 }
@@ -131,8 +173,61 @@ h2 {
 }
 
 .nav-links a {
+    position: relative;
+    display: inline-block; /* Añadido para que el fondo se ajuste al contenido */
+    padding: 10px 15px; /* Ajusta el relleno según sea necesario */
+    text-decoration: none; /* Añadido para eliminar la subrayado predeterminado en los enlaces */
+    color: #000000; /* Añadido para establecer el color del texto */
+}
+
+.nav-links a::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: transparent; /* Fondo transparente por defecto */
+    z-index: -1;
+    border-radius: 10px;
+    transition: background-color 0.5s ease; /* Transición suave para el cambio de color */
+}
+
+.nav-links a:hover::before {
+    background-color: #c7e5c8; /* Cambia el fondo al color deseado al pasar el cursor */
+}
+.navbar {
+    background-color: #000000; /* Fondo verde del menú */
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+}
+
+.logo img {
+    max-height: 9px; /* Ajusta el tamaño del logotipo */
+
+}
+
+.nav-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: flex-end; /* Alinea los enlaces al otro lado del logo */
+    align-items: center; /* Centra verticalmente los enlaces */
+}
+
+.nav-links li {
+    margin-left: 20px; /* Agrega un margen izquierdo entre los enlaces */
+}
+
+.nav-links a {
     text-decoration: none;
-    color: #000000;
+    color: #000000; /* Color del texto de los enlaces */
     font-weight: bold;
 }
 
@@ -140,6 +235,57 @@ h2 {
     text-decoration: underline;
 }
 
+
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background: linear-gradient(#ffffff, rgb(255, 255, 255));
+}
+
+.logo img {
+    max-height: 50px;
+}
+
+.nav-links {
+    list-style: none;
+    margin: 10px;
+    padding: 0;
+    display: flex;
+}
+
+.nav-links li {
+    margin-right: 20px;
+}
+
+.nav-links a {
+    position: relative;
+    display: inline-block; /* Añadido para que el fondo se ajuste al contenido */
+    padding: 10px 15px; /* Ajusta el relleno según sea necesario */
+    text-decoration: none; /* Añadido para eliminar la subrayado predeterminado en los enlaces */
+    color: #000000; /* Añadido para establecer el color del texto */
+}
+
+.nav-links a::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: transparent; /* Fondo transparente por defecto */
+    z-index: -1;
+    border-radius: 10px;
+    transition: background-color 0.5s ease; /* Transición suave para el cambio de color */
+}
+
+.nav-links a:hover::before {
+    background-color: #c7e5c8; /* Cambia el fondo al color deseado al pasar el cursor */
+}
 
 
 .carousel {
@@ -150,6 +296,7 @@ h2 {
 .slide {
     width: 100%;
     display: none;
+    background-size: cover; /* Asegura que el fondo cubra todo el elemento */
 }
 
 .content {
@@ -200,9 +347,10 @@ p {
     font-size: 1.2em;
 }
 .contact-box {
-    width: 300px;
+    width: 100%; /* Ajusta el ancho para hacerlo responsivo */
+    max-width: 400px; /* Establece un ancho máximo para pantallas más grandes */
     background-color: #f0f8e8;
-    padding: 6%;
+    padding: 20px;
     margin: 0 auto;
     text-align: center;
 }
@@ -227,4 +375,65 @@ p {
 .contact-box .social-media a {
     text-decoration: none;
     margin: 0 10px;
+}
+
+/* Consultas de medios para responsividad */
+@media only screen and (max-width: 600px) {
+    /* Ajusta los estilos para pantallas con un ancho máximo de 600px */
+    .container {
+        flex-direction: column; /* Cambia la dirección flex a columna para pantallas más pequeñas */
+    }
+
+    .nav-links {
+        flex-direction: column; /* Muestra los enlaces de navegación en una columna para pantallas más pequeñas */
+        text-align: center;
+    }
+
+    /* Ajusta el tamaño del contact-box y las características para pantallas pequeñas */
+    .features {
+        padding: 20px 0; /* Ajusta el espacio interno */
+    }
+
+    .feature {
+        margin: 0; /* Elimina el margen lateral en pantallas pequeñas */
+    }
+
+    .contact-box {
+        padding: 30px; /* Ajusta el espacio interno */
+    }
+}
+/* ... Otros estilos existentes ... */
+
+.menu-icon {
+    display: none; /* Inicialmente oculto en pantallas grandes */
+    cursor: pointer;
+    font-size: 24px;
+}
+@media only screen and (max-width: 600px) {
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 70px;
+        right: 0; /* Alinea los enlaces a la derecha en pantallas pequeñas */
+        width: 100%;
+        background-color: #ffffff;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.1);
+        z-index: 1;
+    }
+
+    .nav-links.show {
+        display: flex;
+    }
+
+    .nav-links li {
+        text-align: right; /* Alinea los enlaces a la derecha */
+        margin-right: 0;
+        margin-bottom: 10px;
+        margin-left: 0; /* Elimina el margen izquierdo */
+    }
+
+    .menu-icon {
+        display: block;
+    }
 }

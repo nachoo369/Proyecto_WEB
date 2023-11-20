@@ -3,17 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="../static/home.css">
+    <link rel="stylesheet" type="text/css" href="../static/normalize.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-........" crossorigin="anonymous" />
     <title>Inicio</title>
 </head>
 <body>
-    <div class="navbar">
-        <img src="images/logo.png" alt="Logo Repetitivo" class="logo">
-        <ul class="nav-links">
-            <li><a href="#">Centro de Ayuda</a></li>
-            <li><a href="#">Contacto</a></li>
-            <li><a href="#">Reclamos</a></li>
-            <li><a href="#">MiClínica</a></li>
+    <div class="navbar" id="navbar">
+        <div class="logo">
+            <a href="/home">
+                <img src="../static/images/logo.png" alt="Logo Clinica Osorno">
+            </a>
+        </div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="/ayuda"><i class="fas fa-question-circle"></i> Ayuda</a></li>
+            <li><a href="/contacto"><i class="fas fa-envelope"></i> Contacto</a></li>
+            {% if 'rut' in session %}
+                <li><a href="/mi_clinica"><i class="fas fa-user"></i> {{ session['rut'] }}</a></li>
+                <li><a href="/cerrar_sesion"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a></li>
+            {% else %}
+                <li><a href="/login"><i class="fas fa-hospital"></i> MiClínica</a></li>
+            {% endif %}
         </ul>
+        <div class="menu-icon" id="menuIcon">&#9776;</div>
+    </div>
     </div>
     <div class="container">
         <div class="sidebar">
@@ -22,7 +34,7 @@
                 <li><a href="#mostrar">Historial de Consultas</a></li>
                 <li><a href="#recetas">Recetas Médicas</a></li>
                 <li><a href="#medicamentos">Medicamentos</a></li>
-                <li><a href="#calendario">Calendario</a></li>
+                <li><a href="/calendario">Calendario</a></li>
                 <li><a href="#doctores">Doctores</a></li>
                 <li><a href="#centros">Centros</a></li>
             </ul>
@@ -31,7 +43,7 @@
             <div class="image-carousel">
                 <div class="carousel">
                     <div class="carousel-item">
-                        <img src="images/4.png" alt="Imagen 1">
+                        <img src="../static/images/4.jpeg" alt="Imagen 1">
                         <div class="carousel-info">
                             <h3>Revisa Horarios Disponibles</h3>
                             <button>Ver Detalles</button>
@@ -46,7 +58,6 @@
             <!-- Aquí se generará el contenido dinámico -->
         </div>
     </div>
-    <script src="js/mostrar.js"></script>
-
+    <script src="../static/js/navbar.js"></script>
 </body>
 </html>

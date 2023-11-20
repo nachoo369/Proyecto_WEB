@@ -160,5 +160,37 @@ def obtener_horarios_disponibles():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
+
+@app.route("/calendario")
+def calendario():
+    return render_template("calendario.html")
+
+@app.route('/mi_clinica')
+def mi_clinica():
+    if 'rut' in session:
+        # Puedes recuperar información adicional del usuario según sea necesario
+        rut_usuario = session['rut']
+        return render_template('mi_clinica.html', rut=rut_usuario)
+    else:
+        # Si no hay sesión, redirige a la página de inicio o a la página de inicio de sesión
+        return redirect(url_for('home'))
+
+@app.route('/cerrar_sesion')
+def cerrar_sesion():
+    session.clear()
+    return redirect(url_for('home'))
+
+@app.route('/about-us')
+def about_us():
+    return render_template('about-us.html')
+
+@app.route('/contacto')
+def contacto():
+    return render_template('contacto.html')
+
+@app.route('/ayuda')
+def ayuda():
+    return render_template('ayuda.html')
+
 if __name__ == '__main__':
     app.run(debug=True)
