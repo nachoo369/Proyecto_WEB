@@ -74,10 +74,14 @@
                     <!-- Las opciones se cargarán dinámicamente con JavaScript -->
                 </select>
 
-                <a href="/historial_consulta" class="boton-verde" id="reservar" disabled>Reservar Cita</a>
+                <button class="boton-verde" id="reservar" disabled>Reservar Cita</button>
             </section>
         </section>
-
+        <script>
+            // Asigna las variables de sesión a variables JavaScript
+            const nombreCliente = '{{ session["nombre"] }}';
+            const apellidoCliente = '{{ session["apellido"] }}';
+        </script>
         <script src="../static/js/calendario.js"></script>
     </main>
     <script src="../static/js/navbar.js"></script>

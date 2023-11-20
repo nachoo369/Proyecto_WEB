@@ -1,74 +1,50 @@
-<!-- registro.html -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="../static/registro.css">
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI/t1h1l5gMy8H9l1Rnh6/ZyVC16A7HpCKvh9+Kk=" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" integrity="sha512-TNxNvKjS6q44sdNl6S2FylFfDlSqmjEnazS5Yt8Zr0qn8ubLlQCXZ3U2bT7uMMyneOba8DYN54+sX3Lhux5ZSg==" crossorigin="anonymous" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js" integrity="sha512-JN8P9pM85id+tE8wZJ0o7BRSTBilNbOq+3xBsSMhNj+VWg5/ZPy8FpIumI7Q03dXTb4F0UFUj7k+0t7zp6gqGg==" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js" integrity="sha512-Dg4C5bX3GkXU+2jphTf8Rnm4e39H3bmlUTbIVgX1hSOpJx81LCi+Vw23XrTOZf46c3VSaVtUsHmXvlJZk6FignA==" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI/t1h1l5gMy8H9l1Rnh6/ZyVC16A7HpCKvh9+Kk=" crossorigin="anonymous"></script>
-    <script defer src="../static/js/registro_consulta.js"></script>
-    <title>Registro de Consulta</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historial de Consultas Médicas</title>
+    <link rel="stylesheet" type="text/css" href="../static/historial.css">
+    <link rel="stylesheet" type="text/css" href="../static/normalize.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Registro de Consulta</h1>
-        <form action="/registro_consulta" method="POST" id="registro-form">
-            <!-- Datos del paciente -->
-            <label for="nombre">Nombre:</label>
-            <input type="text" id="nombre" name="nombre" required>
-
-            <label for="apellidos">Apellidos:</label>
-            <input type="text" id="apellidos" name="apellidos" required>
-
-            <label for="rut">RUT:</label>
-            <input type="text" id="rut" name="rut" required>
-
-            <!-- Selección de tipo de consulta -->
-            <label for="tipo-consulta">Tipo de Consulta:</label>
-            <select id="tipo-consulta" name="tipo-consulta" required>
-                <option value="consulta1">Consultas pediátricas</option>
-                <option value="consulta2">Consultas ginecológicas</option>
-                <option value="consulta3">Consultas urológicas</option>
-                <option value="consulta4">Consultas de atención primaria</option>
-                <!-- Agrega más opciones según sea necesario -->
-            </select>
-
-            <!-- Selección de consultorio -->
-            <label for="consultorio">Consultorio:</label>
-            <select id="consultorio" name="consultorio" required>
-                <!-- Agrega opciones de consultorios según sea necesario -->
-                <option value="1">Consultorio Rahue</option>
-                <option value="2">Consultorio Zenteno</option>
-            </select>
-
-            <!-- Selección de médicos -->
-            <label for="medico">Médico:</label>
-            <select id="medico" name="medico" required>
-                <!-- Las opciones se cargarán dinámicamente con JavaScript -->
-            </select>
-
-            <!-- Calendario -->
-            <label for="fecha">Fecha:</label>
-            <input type="date" id="fecha" name="fecha" required>
-
-            <!-- Horarios disponibles -->
-            <label for="horario">Horario:</label>
-            <select id="horario" name="horario" required>
-                <!-- Las opciones se cargarán dinámicamente con JavaScript -->
-            </select>
-
-            <!-- Botón de registro -->
-            <button type="submit" id="registro-button">Registrar Consulta</button>
-        </form>
-    </div>
-
-    <!-- GIF de carga -->
-    <div id="loading" style="display:none;">
-        <img src="../static/images/loading.gif" alt="Cargando...">
-    </div>
-
+    <h1>Historial de Consultas Médicas</h1>
+    
+    <label for="ordenarPor">Ordenar por:</label>
+    <select id="ordenarPor" name="ordenar_por" onchange="submitForm(this)">
+        <option value="nombre_paciente">Nombre</option>
+        <option value="doctor_atendio">Doctor</option>
+        <option value="fecha_consulta">Fecha</option>
+        <option value="horario_consulta">Horario</option>
+    </select>
+    
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Nombre Paciente</th>
+                <th>Doctor Atendió</th>
+                <th>Fecha Consulta</th>
+                <th>Horario Consulta</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for consulta in consultas %}
+            <tr>
+                <td>{{ consulta.nombre_paciente }}</td>
+                <td>{{ consulta.doctor_atendio }}</td>
+                <td>{{ consulta.fecha_consulta }}</td>
+                <td>{{ consulta.horario_consulta }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <script>
+        function submitForm(selectElement) {
+            var form = selectElement.closest('form');
+            if (form) {
+                form.submit();
+            }
+        }
+    </script>
 </body>
 </html>

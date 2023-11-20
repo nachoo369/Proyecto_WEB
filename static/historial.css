@@ -1,0 +1,53 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+    background: #ececec;
+    padding: 0;
+    margin: 0;
+}
+
+h1 {
+    color: #000000;
+    text-align: center;
+}
+
+label {
+    margin-right: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    border: 1px solid #000000;
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #4CAF50;
+    color: #fff;
+}
+
+select {
+    padding: 5px;
+}
+
+/* Agrega el resto de tu estilo aquí */
+
+/* Estilo para el contenedor principal */
+.container {
+    display: flex;
+    margin: 20px;
+}
+
+/* Estilo para el carrusel de imágenes */
+/* ... (si es necesario) */
+
+/* Media Query para pantallas pequeñas */
+@media only screen and (max-width: 768px) {
+    /* Estilo para pantallas pequeñas */
+    /* ... (si es necesario) */
+}

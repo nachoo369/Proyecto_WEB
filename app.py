@@ -1,17 +1,32 @@
 from flask import Flask, render_template, request, redirect, url_for, session, jsonify
+from flask_sqlalchemy import SQLAlchemy
 import psycopg2
 import time
+from datetime import datetime
 
 app = Flask(__name__)
 app.secret_key = 'asd369'
+app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:asd369@localhost/clinica"
+
+
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Configuración de la base de datos
+db = SQLAlchemy(app)
 db_config = {
     'dbname': 'clinica',
     'user': 'postgres',
     'password': 'asd369',
     'host': 'localhost'
 }
+#class
+class HistorialConsulta(db.Model):
+    __tablename__ = 'historial_consultas'
+    id = db.Column(db.Integer, primary_key=True)
+    nombre_paciente = db.Column(db.String(100))
+    doctor_atendio = db.Column(db.String(100))
+    fecha_consulta = db.Column(db.Date)
+    horario_consulta = db.Column(db.Time)
 #Ruta para index
 @app.route('/')
 def index():
@@ -77,7 +92,9 @@ def procesar_login():
 
         if usuario:
             # Usuario autenticado con éxito, puedes almacenar información en la sesión
-            session['rut'] = usuario[0]  # Almacena el RUT en la sesión, o cualquier otro dato que desees
+            session['rut'] = usuario[0]  # Almacena el RUT en la sesión
+            session['nombre'] = usuario[1]  # Almacena el nombre en la sesión
+            session['apellido'] = usuario[2]  # Almacena el apellido en la sesión
             return jsonify({'valid': True})
         else:
             return jsonify({'valid': False, 'error': 'Credenciales inválidas'})
@@ -90,76 +107,7 @@ def home():
     return render_template("home.html")
 
 
-@app.route('/registro_consulta')
-def consulta():
-    # Conectarse a la base de datos para obtener la lista de médicos
-    conn = psycopg2.connect(**db_config)
-    cursor = conn.cursor()
-
-    # Obtener la lista de médicos
-    cursor.execute("SELECT rutP, nombre FROM profesionales")
-    medicos = cursor.fetchall()
-
-    # Cerrar la conexión a la base de datos
-    conn.close()
-
-    # Renderizar el template con la lista de médicos
-    return render_template("registro_consulta.html", medicos=medicos)
-
-# Ruta para procesar el formulario de registro de consulta
-@app.route('/procesar_registro_consulta', methods=['POST'])
-def procesar_registro_consulta():
-    # Recuperar datos del formulario
-    nombre = request.form['nombre']
-    apellidos = request.form['apellidos']
-    rut = request.form['rut']
-    tipo_consulta = request.form['tipo-consulta']
-    consultorio = request.form['consultorio']
-    medico = request.form['medico']
-    fecha = request.form['fecha']
-    horario = request.form['horario']
-
-    # Conectarse a la base de datos
-    conn = psycopg2.connect(**db_config)
-    cursor = conn.cursor()
-
-    # Insertar datos en la base de datos (tabla de consultas)
-    cursor.execute(
-        "INSERT INTO consultas (nombre, apellidos, rut, tipo_consulta, consultorio, medico, fecha, horario) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)",
-        (nombre, apellidos, rut, tipo_consulta, consultorio, medico, fecha, horario)
-    )
-
-    conn.commit()
-    conn.close()
-
-    # Aquí deberías implementar la lógica para obtener los horarios disponibles según el médico y la fecha seleccionados
-    # Puedes almacenar estos horarios en una lista y devolverla como respuesta al cliente
-
-    # Devolver una respuesta indicando que la consulta se registró correctamente y la lista de horarios disponibles
-    return jsonify({'mensaje': 'Consulta registrada con éxito', 'horarios': obtener_horarios_disponibles()})
-
-# Función para obtener horarios disponibles desde la base de datos
-@app.route('/obtener_horarios_disponibles', methods=['POST'])
-def obtener_horarios_disponibles():
-    try:
-        rut_medico = request.form['rut_medico']  # Asegúrate de tener este campo en tu formulario
-        fecha_seleccionada = request.form['fecha']  # Asegúrate de tener este campo en tu formulario
-
-        # Conectarse a la base de datos
-        conn = psycopg2.connect(**db_config)
-        cursor = conn.cursor()
-
-        # Realizar la consulta para obtener los horarios disponibles del médico en la fecha seleccionada
-        cursor.execute("SELECT hora_inicio, hora_fin FROM HORARIO WHERE rutP = %s", (rut_medico,))
-        horarios_disponibles = cursor.fetchall()
-
-        conn.close()
-
-        # Devolver los horarios disponibles como respuesta en formato JSON
-        return jsonify({'horarios': horarios_disponibles})
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
-
+#
 
 @app.route("/calendario")
 def calendario():
@@ -192,5 +140,39 @@ def contacto():
 def ayuda():
     return render_template('ayuda.html')
 
+#historial
+# Ruta para mostrar el historial de consultas
+@app.route('/historial_consultas')
+def historial_consultas():
+    ordenar_por = request.args.get('ordenar_por', 'fecha_consulta')
+    consultas = HistorialConsulta.query.order_by(getattr(HistorialConsulta, ordenar_por)).all()
+    print(consultas)  # Imprime las consultas en la consola del servidor
+    return render_template('registro_consulta.html', consultas=consultas)
+
+@app.route('/procesar_reserva', methods=['POST'])
+def procesar_reserva():
+    try:
+        # Obtén los datos de la reserva del formulario
+        nombre_cliente = request.form['nombre_cliente']
+        apellido_cliente = request.form['apellido_cliente']
+        doctor_seleccionado = request.form['doctor_seleccionado']
+        fecha_reserva = request.form['fecha_reserva']
+        horario_reserva = request.form['horario_reserva']
+
+        # Insertar datos en la base de datos
+        conn = psycopg2.connect(**db_config)
+        cursor = conn.cursor()
+
+        cursor.execute(
+            "INSERT INTO historial_consultas (nombre_paciente, doctor_atendio, fecha_consulta, horario_consulta) VALUES (%s, %s, %s, %s)",
+            (f"{nombre_cliente} {apellido_cliente}", doctor_seleccionado, fecha_reserva, horario_reserva)
+        )
+
+        conn.commit()
+        conn.close()
+
+        return jsonify({'success': True, 'message': 'Reserva realizada con éxito'})
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)}), 500
 if __name__ == '__main__':
     app.run(debug=True)

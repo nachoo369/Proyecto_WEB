@@ -1,13 +1,11 @@
+let mesActual = 0; // Inicializado en enero (0-index
 document.addEventListener('DOMContentLoaded', function () {
     const calendario = document.getElementById('calendario');
     const tipoConsultaSelect = document.getElementById('tipo-consulta');
     const doctorSelect = document.getElementById('doctor');
     const horarioSelect = document.getElementById('horario');
     const reservarButton = document.getElementById('reservar');
-    const nombreMes = document.getElementById('nombreMes');
-    const anteriorMesBtn = document.getElementById('anteriorMes');
-    const siguienteMesBtn = document.getElementById('siguienteMes');
-
+    const mesSelect = document.getElementById('mes'); // Agregado: Obtener el elemento del mes
     // Ejemplo de datos de disponibilidad (puedes obtener estos datos del servidor)
     const disponibilidadDoctores = {
         'Dr. Jorge Lopez Muñoz': [5, 10, 15, 22, 25, 31],
@@ -18,6 +16,8 @@ document.addEventListener('DOMContentLoaded', function () {
         'Dra Camila Montes Miranda' :[1,5.7,8,12,23,25]
         // Agrega más datos según sea necesario
     };
+
+    //////// MANDAR A BD
 
     // Llena el menú desplegable de doctores según el tipo de consulta seleccionado
     tipoConsultaSelect.addEventListener('change', function () {
@@ -48,7 +48,10 @@ document.addEventListener('DOMContentLoaded', function () {
             actualizarCalendario(doctorSeleccionado);
         });
     }
-
+    let fechaSeleccionada = {
+        mes: 0, // Inicializado en enero (0-index)
+        dia: 0
+    };
     // Actualiza el calendario según el doctor seleccionado
     function actualizarCalendario(doctor) {
         // Limpiar días antiguos
@@ -68,6 +71,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Agregar evento de clic para el día ocupado
                 dia.addEventListener('click', function () {
                     alert('Este día está ocupado. Por favor, seleccione otro día.');
+                    fechaSeleccionada = {
+                        mes: mesActual,
+                        dia: diaSeleccionado
+                    };
                 });
             } else {
                 dia.classList.add('disponible');
@@ -94,7 +101,10 @@ document.addEventListener('DOMContentLoaded', function () {
     function actualizarHorariosDisponibles(doctor, dia) {
         // Ejemplo de horarios disponibles (puedes obtener estos datos del servidor)
         const horariosDisponibles = obtenerHorariosPorDoctorYDia(doctor, dia);
-
+        fechaSeleccionada = {
+            mes: mesActual,
+            dia: dia
+        };
         // Limpiar opciones antiguas
         horarioSelect.innerHTML = '';
 
@@ -123,17 +133,44 @@ document.addEventListener('DOMContentLoaded', function () {
         // Por ahora, usamos datos de ejemplo
         return ['09:00', '11:00', '13:00', '15:00'];
     }
-        // Evento para cambiar el mes hacia atrás
-    anteriorMesBtn.addEventListener('click', function () {
-        mesActual = (mesActual - 1 + 12) % 12;
-        const doctorSeleccionado = doctorSelect.value;
-        actualizarCalendario(doctorSeleccionado);
-    });
 
-    // Evento para cambiar el mes hacia adelante
-    siguienteMesBtn.addEventListener('click', function () {
-        mesActual = (mesActual + 1) % 12;
+    reservarButton.addEventListener('click', function () {
+        // Accede a la fecha completa (mes y día)
+        const mesSeleccionado = (parseInt(mesSelect.value) + 1).toString().padStart(2, '0');
+        const diaSeleccionado = fechaSeleccionada.dia;
+    
+        // Obtén el nombre del doctor seleccionado
         const doctorSeleccionado = doctorSelect.value;
-        actualizarCalendario(doctorSeleccionado);
+        const nombreClienteReserva = nombreCliente;
+
+        const apellidoClientReserva = apellidoCliente;
+    
+        // Obtén el horario seleccionado
+        const horarioSeleccionado = horarioSelect.value;
+        const fechaFormateada = `${diaSeleccionado.toString().padStart(2, '0')}/${mesSeleccionado}/2023`;
+    
+        // Realiza la solicitud fetch para enviar los datos al servidor
+        fetch('/procesar_reserva', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: `nombre_cliente=${nombreClienteReserva}&apellido_cliente=${apellidoClientReserva}&doctor_seleccionado=${doctorSeleccionado}&fecha_reserva=${fechaFormateada}&horario_reserva=${horarioSeleccionado}`,
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Manejar la respuesta del servidor si es necesario
+            console.log(data);
+    
+            // Puedes mostrar un mensaje al usuario o redirigir a otra página aquí
+    
+            // Por ejemplo, redirigir a la página de historial de consultas
+            window.location.href = '/historial_consultas';
+        })
+        .catch(error => {
+            // Manejar errores de la solicitud
+            console.error('Error:', error);
+        });
     });
 });
+
