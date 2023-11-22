@@ -7,6 +7,8 @@
     <link rel="stylesheet" type="text/css" href="../static/historial.css">
     <link rel="stylesheet" type="text/css" href="../static/normalize.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-........" crossorigin="anonymous" />
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI/tTll2U6ZOGJmA9vC7bMx62p4IeZi1+admzOaA=" crossorigin="anonymous"></script>
+
 </head>
 <body>
     <div class="navbar" id="navbar">
@@ -28,15 +30,7 @@
         <div class="menu-icon" id="menuIcon">&#9776;</div>
     </div>
     <h1>Historial de Consultas Médicas</h1>
-    
-    <form id="ordenarForm" action="/historial_consultas_ordenado" method="POST">
-        <label for="ordenarPor">Ordenar por:</label>
-        <select id="ordenarPor" name="ordenar_por" onchange="submitForm(this)">
-            <option value="doctor_atendio">Doctor</option>
-            <option value="fecha_consulta">Fecha</option>
-            <option value="horario_consulta">Horario</option>
-        </select>
-    </form>
+
     
     <table border="1">
         <thead>
@@ -60,22 +54,6 @@
             {% endfor %}
         </tbody>
     </table>
-    <script>
-        function submitForm() {
-            var formData = $('#ordenarForm').serialize();
-    
-            // Realiza una solicitud AJAX al servidor
-            $.ajax({
-                type: 'POST',
-                url: '/historial_consultas_ordenado',
-                data: formData,
-                success: function(data) {
-                    // Actualiza el contenido de la tabla con la respuesta del servidor
-                    $('tbody').html(data);
-                }
-            });
-        }
-    </script>
     <script src="../static/js/navbar.js"></script>
 </body>
 </html>

@@ -200,10 +200,7 @@ def historial_consultas_ordenado():
     if request.method == 'POST':
         ordenar_por = request.form.get('ordenar_por', 'fecha_consulta')
     else:
-        # Si no es una solicitud POST, usa la opción predeterminada
         ordenar_por = 'fecha_consulta'
-
-    # Asegúrate de que ordenas por el campo correcto ('fecha_consulta' en lugar de 'rut')
     consultas = HistorialConsulta.query.filter_by(rut_paciente=session['rut']).order_by(getattr(HistorialConsulta, ordenar_por)).all()
 
     return render_template('registro_consulta.html', consultas=consultas)

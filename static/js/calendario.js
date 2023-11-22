@@ -5,16 +5,14 @@ document.addEventListener('DOMContentLoaded', function () {
     const doctorSelect = document.getElementById('doctor');
     const horarioSelect = document.getElementById('horario');
     const reservarButton = document.getElementById('reservar');
-    const mesSelect = document.getElementById('mes'); // Agregado: Obtener el elemento del mes
-    // Ejemplo de datos de disponibilidad (puedes obtener estos datos del servidor)
+    const mesSelect = document.getElementById('mes');
     const disponibilidadDoctores = {
-        'Dr. Jorge Lopez Muñoz': [5, 10, 15, 22, 25, 31],
-        'Dra. Amanda Reyes Perez': [8, 12, 22],
-        'Dr. Jorge Lopez Muñoz' :[1,5.7,8,12,23,25],
-        'Dr. Felipe Norambuena Reyes' :[1,5.7,8,12,23,25],
-        'Dr. Alfonso Miranda Muñoz' :[1,5.7,8,12,23,25],
-        'Dra Camila Montes Miranda' :[1,5.7,8,12,23,25]
-        // Agrega más datos según sea necesario
+        'Dr. Jorge Lopez Muñoz': [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,24,31,27],
+        'Dra. Amanda Reyes Perez': [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,24,31,27],
+        'Dr. Jorge Lopez Muñoz' :[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,24,31,27],
+        'Dr. Felipe Norambuena Reyes' :[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,24,31,27],
+        'Dr. Alfonso Miranda Muñoz' :[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,30,27],
+        'Dra Camila Montes Miranda' :[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,30,27],
     };
 
     // Llena el menú desplegable de doctores según el tipo de consulta seleccionado
@@ -23,22 +21,15 @@ document.addEventListener('DOMContentLoaded', function () {
         llenarDoctores(tipoConsulta);
     });
 
-    // Llena el menú desplegable de doctores con datos de ejemplo
     function llenarDoctores(tipoConsulta) {
         const doctores = obtenerDoctoresPorConsulta(tipoConsulta);
-
-        // Limpiar opciones antiguas
         doctorSelect.innerHTML = '';
-
-        // Agregar nuevas opciones
         for (const doctor of doctores) {
             const option = document.createElement('option');
             option.value = doctor;
             option.textContent = doctor;
             doctorSelect.appendChild(option);
         }
-
-        // Actualizar el calendario cuando se selecciona un doctor
         doctorSelect.addEventListener('change', function () {
             const doctorSeleccionado = doctorSelect.value;
             actualizarCalendario(doctorSeleccionado);
@@ -50,21 +41,15 @@ document.addEventListener('DOMContentLoaded', function () {
     };
     // Actualiza el calendario según el doctor seleccionado
     function actualizarCalendario(doctor) {
-        // Limpiar días antiguos
         calendario.innerHTML = '';
 
-        // Obtener la disponibilidad del doctor seleccionado
         const diasOcupados = disponibilidadDoctores[doctor] || [];
 
-        // Llenar el calendario con días
         for (let i = 1; i <= 31; i++) {
             const dia = document.createElement('div');
             dia.classList.add('calendario_dias');
-
-            // Verificar si el día está ocupado y aplicar estilos
             if (diasOcupados.includes(i)) {
                 dia.classList.add('ocupado');
-                // Agregar evento de clic para el día ocupado
                 dia.addEventListener('click', function () {
                     alert('Este día está ocupado. Por favor, seleccione otro día.');
                     fechaSeleccionada = {
@@ -74,7 +59,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
             } else {
                 dia.classList.add('disponible');
-                // Agregar evento de clic para el día disponible
                 dia.addEventListener('click', function () {
                     // Almacena el día seleccionado
                     const diaSeleccionado = i;
