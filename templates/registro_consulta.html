@@ -18,8 +18,8 @@
             </a>
         </div>
         <ul class="nav-links" id="navLinks">
-            <li><a href="#about"><i class="fas fa-question-circle"></i> Ayuda</a></li>
-            <li><a href="#contacto"><i class="fas fa-envelope"></i> Contacto</a></li>
+            <li><a href="/ayuda"><i class="fas fa-question-circle"></i> Ayuda</a></li>
+            <li><a href="/contacto"><i class="fas fa-envelope"></i> Contacto</a></li>
             {% if 'rut' in session %}
                 <li><a href="/mi_clinica"><i class="fas fa-user"></i> {{ session['rut'] }}</a></li>
                 <li><a href="/cerrar_sesion"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a></li>

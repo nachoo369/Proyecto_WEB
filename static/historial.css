@@ -106,7 +106,7 @@ select {
 /* Media Query para pantallas pequeñas */
 @media only screen and (max-width: 768px) {
     .navbar {
-        padding: 10px 20px; /* Ajusta el relleno según sea necesario */
+        padding: 10px 20px;
     }
 
     .nav-links {

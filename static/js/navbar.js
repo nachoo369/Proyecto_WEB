@@ -6,7 +6,6 @@ document.addEventListener('DOMContentLoaded', function () {
         navLinks.classList.toggle('show');
     });
 
-    // Ocultar menú al hacer clic en un enlace (opcional)
     navLinks.addEventListener('click', function () {
         navLinks.classList.remove('show');
     });
