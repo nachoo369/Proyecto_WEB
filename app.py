@@ -38,7 +38,6 @@ def index():
 def registro():
     return render_template('registro.html')
 
-# Ruta para procesar el registro
 @app.route('/procesar_registro', methods=['POST'])
 def procesar_registro():
     nombre = request.form['nombre']
@@ -51,16 +50,21 @@ def procesar_registro():
     ciudad = request.form['ciudad']
     sexo = request.form['sexo']
     telefono = request.form['telefono']
+    email = request.form['email']
+    confirmar_email = request.form['confirmar-email']
+
+    # Validar que el correo electrónico y la confirmación coincidan
+    if email != confirmar_email:
+        return jsonify({'success': False, 'error': 'El correo electrónico y la confirmación no coinciden'})
 
     # Conectarse a la base de datos
     conn = psycopg2.connect(database="clinica", user="postgres", password="asd369", host="localhost", port="5432", options="-c client_encoding=UTF8")
     cursor = conn.cursor()
 
-
     # Insertar datos en la base de datos
     cursor.execute(
-        "INSERT INTO cliente (rutPac, nombre, apellido, fechanac, region, ciudad, sexo, telefono, contraseña) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)",
-        (rut, nombre, apellidos, fecha_nacimiento, region, ciudad, sexo, telefono, clave)
+    "INSERT INTO cliente (rutPac, nombre, apellido, fechanac, region, ciudad, sexo, telefono, contraseña, email, confirmar_email) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
+    (rut, nombre, apellidos, fecha_nacimiento, region, ciudad, sexo, telefono, clave, email, confirmar_email)
     )
 
     conn.commit()
@@ -117,7 +121,7 @@ def mi_clinica():
     if 'rut' in session:
         # Puedes recuperar información adicional del usuario según sea necesario
         rut_usuario = session['rut']
-        return render_template('mi_clinica.html', rut=rut_usuario)
+        return render_template('home.html', rut=rut_usuario)
     else:
         # Si no hay sesión, redirige a la página de inicio o a la página de inicio de sesión
         return redirect(url_for('home'))
@@ -195,15 +199,6 @@ def procesar_reserva():
     except Exception as e:
         return jsonify({'success': False, 'error': str(e)}), 500
 
-@app.route('/historial_consultas_ordenado', methods=['GET', 'POST'])
-def historial_consultas_ordenado():
-    if request.method == 'POST':
-        ordenar_por = request.form.get('ordenar_por', 'fecha_consulta')
-    else:
-        ordenar_por = 'fecha_consulta'
-    consultas = HistorialConsulta.query.filter_by(rut_paciente=session['rut']).order_by(getattr(HistorialConsulta, ordenar_por)).all()
-
-    return render_template('registro_consulta.html', consultas=consultas)
 
 if __name__ == '__main__':
     app.run(debug=True)
