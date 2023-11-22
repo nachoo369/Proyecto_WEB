@@ -17,8 +17,8 @@
             </a>
         </div>
         <ul class="nav-links" id="navLinks">
-            <li><a href="#about"><i class="fas fa-question-circle"></i> Ayuda</a></li>
-            <li><a href="#contacto"><i class="fas fa-envelope"></i> Contacto</a></li>
+            <li><a href="/ayuda"><i class="fas fa-question-circle"></i> Ayuda</a></li>
+            <li><a href="/contacto"><i class="fas fa-envelope"></i> Contacto</a></li>
             {% if 'rut' in session %}
                 <li><a href="/mi_clinica"><i class="fas fa-user"></i> {{ session['rut'] }}</a></li>
                 <li><a href="/cerrar_sesion"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a></li>
@@ -48,16 +48,7 @@
             </select>
             <label for="mes">Mes:</label>
             <select id="mes" class="menu-desplegable">
-                <option value="0">Enero</option>
-                <option value="1">Febrero</option>
-                <option value="2">Marzo</option>
-                <option value="3">Abril</option>
-                <option value="4">Mayo</option>
-                <option value="5">Junio</option>
-                <option value="6">Julio</option>
-                <option value="7">Agosto</option>
-                <option value="8">Septiembre</option>
-                <option value="9">Octubre</option>
+                <!-- falta -->
                 <option value="10">Noviembre</option>
                 <option value="11">Diciembre</option>
             </select>
@@ -78,9 +69,8 @@
             </section>
         </section>
         <script>
-            // Asigna las variables de sesión a variables JavaScript
-            const nombreCliente = '{{ session["nombre"] }}';
-            const apellidoCliente = '{{ session["apellido"] }}';
+            // Asigna el valor del RUT de la sesión a una variable JavaScript
+            let rutClienteReserva;
         </script>
         <script src="../static/js/calendario.js"></script>
     </main>

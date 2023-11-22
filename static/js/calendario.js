@@ -17,8 +17,6 @@ document.addEventListener('DOMContentLoaded', function () {
         // Agrega más datos según sea necesario
     };
 
-    //////// MANDAR A BD
-
     // Llena el menú desplegable de doctores según el tipo de consulta seleccionado
     tipoConsultaSelect.addEventListener('change', function () {
         const tipoConsulta = tipoConsultaSelect.value;
@@ -27,8 +25,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Llena el menú desplegable de doctores con datos de ejemplo
     function llenarDoctores(tipoConsulta) {
-        // Aquí deberías cargar los doctores según el tipo de consulta desde tu base de datos
-        // Por ahora, usamos datos de ejemplo
         const doctores = obtenerDoctoresPorConsulta(tipoConsulta);
 
         // Limpiar opciones antiguas
@@ -135,36 +131,26 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     reservarButton.addEventListener('click', function () {
-        // Accede a la fecha completa (mes y día)
         const mesSeleccionado = (parseInt(mesSelect.value) + 1).toString().padStart(2, '0');
         const diaSeleccionado = fechaSeleccionada.dia;
-    
-        // Obtén el nombre del doctor seleccionado
         const doctorSeleccionado = doctorSelect.value;
-        const nombreClienteReserva = nombreCliente;
-
-        const apellidoClientReserva = apellidoCliente;
-    
-        // Obtén el horario seleccionado
         const horarioSeleccionado = horarioSelect.value;
-        const fechaFormateada = `${diaSeleccionado.toString().padStart(2, '0')}/${mesSeleccionado}/2023`;
     
-        // Realiza la solicitud fetch para enviar los datos al servidor
+        // Utiliza la variable configurada en el script del HTML
+        const rutClienteReservaLocal = rutClienteReserva;
+    
+        const fechaFormateada = `${diaSeleccionado.toString().padStart(2, '0')}/${mesSeleccionado}/2023`;
+
         fetch('/procesar_reserva', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
             },
-            body: `nombre_cliente=${nombreClienteReserva}&apellido_cliente=${apellidoClientReserva}&doctor_seleccionado=${doctorSeleccionado}&fecha_reserva=${fechaFormateada}&horario_reserva=${horarioSeleccionado}`,
+            body: `rut_cliente=${rutClienteReservaLocal}&doctor_seleccionado=${doctorSeleccionado}&fecha_reserva=${fechaFormateada}&horario_reserva=${horarioSeleccionado}`,
         })
         .then(response => response.json())
         .then(data => {
-            // Manejar la respuesta del servidor si es necesario
             console.log(data);
-    
-            // Puedes mostrar un mensaje al usuario o redirigir a otra página aquí
-    
-            // Por ejemplo, redirigir a la página de historial de consultas
             window.location.href = '/historial_consultas';
         })
         .catch(error => {

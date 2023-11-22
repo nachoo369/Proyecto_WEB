@@ -6,45 +6,76 @@
     <title>Historial de Consultas Médicas</title>
     <link rel="stylesheet" type="text/css" href="../static/historial.css">
     <link rel="stylesheet" type="text/css" href="../static/normalize.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-........" crossorigin="anonymous" />
 </head>
 <body>
+    <div class="navbar" id="navbar">
+        <div class="logo">
+            <a href="/home">
+                <img src="../static/images/logo.png" alt="Logo Clinica Osorno">
+            </a>
+        </div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#about"><i class="fas fa-question-circle"></i> Ayuda</a></li>
+            <li><a href="#contacto"><i class="fas fa-envelope"></i> Contacto</a></li>
+            {% if 'rut' in session %}
+                <li><a href="/mi_clinica"><i class="fas fa-user"></i> {{ session['rut'] }}</a></li>
+                <li><a href="/cerrar_sesion"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a></li>
+            {% else %}
+                <li><a href="/login"><i class="fas fa-hospital"></i> MiClínica</a></li>
+            {% endif %}
+        </ul>
+        <div class="menu-icon" id="menuIcon">&#9776;</div>
+    </div>
     <h1>Historial de Consultas Médicas</h1>
     
-    <label for="ordenarPor">Ordenar por:</label>
-    <select id="ordenarPor" name="ordenar_por" onchange="submitForm(this)">
-        <option value="nombre_paciente">Nombre</option>
-        <option value="doctor_atendio">Doctor</option>
-        <option value="fecha_consulta">Fecha</option>
-        <option value="horario_consulta">Horario</option>
-    </select>
+    <form id="ordenarForm" action="/historial_consultas_ordenado" method="POST">
+        <label for="ordenarPor">Ordenar por:</label>
+        <select id="ordenarPor" name="ordenar_por" onchange="submitForm(this)">
+            <option value="doctor_atendio">Doctor</option>
+            <option value="fecha_consulta">Fecha</option>
+            <option value="horario_consulta">Horario</option>
+        </select>
+    </form>
     
     <table border="1">
         <thead>
             <tr>
-                <th>Nombre Paciente</th>
                 <th>Doctor Atendió</th>
                 <th>Fecha Consulta</th>
                 <th>Horario Consulta</th>
+                <th>Estado</th>
+                <th>Diagnóstico</th>
             </tr>
         </thead>
         <tbody>
             {% for consulta in consultas %}
             <tr>
-                <td>{{ consulta.nombre_paciente }}</td>
                 <td>{{ consulta.doctor_atendio }}</td>
                 <td>{{ consulta.fecha_consulta }}</td>
                 <td>{{ consulta.horario_consulta }}</td>
+                <td>{{ consulta.estado }}</td>
+                <td><a href="{{ url_for('descargar_diagnostico', consulta_id=consulta.id) }}">Descargar PDF</a></td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
     <script>
-        function submitForm(selectElement) {
-            var form = selectElement.closest('form');
-            if (form) {
-                form.submit();
-            }
+        function submitForm() {
+            var formData = $('#ordenarForm').serialize();
+    
+            // Realiza una solicitud AJAX al servidor
+            $.ajax({
+                type: 'POST',
+                url: '/historial_consultas_ordenado',
+                data: formData,
+                success: function(data) {
+                    // Actualiza el contenido de la tabla con la respuesta del servidor
+                    $('tbody').html(data);
+                }
+            });
         }
     </script>
+    <script src="../static/js/navbar.js"></script>
 </body>
 </html>

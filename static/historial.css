@@ -27,7 +27,7 @@ th, td {
 }
 
 th {
-    background-color: #4CAF50;
+    background-color: #398e3d;
     color: #fff;
 }
 
@@ -42,12 +42,104 @@ select {
     display: flex;
     margin: 20px;
 }
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background: linear-gradient(#ffffff, rgb(255, 255, 255));
+}
+
+/* Estilo del logotipo */
+.logo img {
+    max-height: 50px;
+}
+
+/* Estilo de los enlaces del menú */
+.nav-links {
+    list-style: none;
+    margin: 10px;
+    padding: 0;
+    display: flex;
+}
+
+.nav-links li {
+    margin-right: 20px;
+}
+
+.nav-links a {
+    position: relative;
+    display: inline-block;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: #000000;
+    font-weight: bold;
+}
+
+.nav-links a::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: transparent;
+    z-index: -1;
+    border-radius: 10px;
+    transition: background-color 0.5s ease;
+}
+
+.nav-links a:hover::before {
+    background-color: #c7e5c8;
+}
 
 /* Estilo para el carrusel de imágenes */
 /* ... (si es necesario) */
-
+.menu-icon {
+    display: none; /* Inicialmente oculto en pantallas grandes */
+    cursor: pointer;
+    font-size: 24px;
+}
 /* Media Query para pantallas pequeñas */
 @media only screen and (max-width: 768px) {
-    /* Estilo para pantallas pequeñas */
-    /* ... (si es necesario) */
+    .navbar {
+        padding: 10px 20px; /* Ajusta el relleno según sea necesario */
+    }
+
+    .nav-links {
+        flex-direction: column;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background-color: #ffffff;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.1);
+        z-index: 1;
+        display: none; /* Oculto por defecto en pantallas pequeñas */
+    }
+
+    .nav-links.show {
+        display: flex;
+    }
+
+    .nav-links li {
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    .nav-links a {
+        padding: 15px; /* Aumenta el tamaño del área de clic para enlaces */
+    }
+
+    .menu-icon {
+        display: block;
+        cursor: pointer;
+        font-size: 24px;
+        margin-right: 20px; /* Agrega un espacio entre el ícono y otros elementos */
+    }
+
 }
+
